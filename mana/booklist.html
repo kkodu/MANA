@@ -1,0 +1,143 @@
+<html>
+<head>
+<meta name=viewport content="width=device-width, initial-scale=1, user-scalable=0">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet"> 
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+<link rel="stylesheet" href="css/core.css">
+<link rel="stylesheet" href="css/core2.css" media="only screen and (min-width:800px)">
+<link rel="stylesheet" href="css/topbar.css">
+<title>MANA BOOKLIST</title>
+<style>
+	#book-register {
+	    width: 100%; height: 120px;
+	    margin-bottom: 3px;
+
+	    border : 1px solid #e5e5e5;
+	    background-color: #F8F8F8;
+
+	    -webkit-border-radius: 5px;
+        -moz-border-radius: 5px;
+        border-radius: 5px;
+	}
+
+	#book-register > a {
+	    display: block;
+	    width: 99%; height: 106px;
+		margin: 6px auto 0;
+
+        -webkit-border-radius: 5px;
+        -moz-border-radius: 5px;
+        border-radius: 5px;
+
+	    -webkit-box-shadow: 0px 0px 10px #ffffff;
+	    -moz-box-shadow: 0px 0px 10px #ffffff;
+	    box-shadow: 0px 0px 10px #ffffff;
+
+	    background: #3fe5e8;
+            background-image: -webkit-linear-gradient(top, #3fe5e8, #aee8e5);
+            background-image: -moz-linear-gradient(top, #3fe5e8, #aee8e5);
+            background-image: -ms-linear-gradient(top, #3fe5e8, #aee8e5);
+            background-image: -o-linear-gradient(top, #3fe5e8, #aee8e5);
+            background-image: linear-gradient(to bottom, #3fe5e8, #aee8e5);
+
+	    font-family: 'Roboto', sans-serif;
+	}
+
+	#book-register > a:hover {
+	    background: #59ff59;
+  	    background-image: -webkit-linear-gradient(top, #59ff59, #b0ffb5);
+  	    background-image: -moz-linear-gradient(top, #59ff59, #b0ffb5);
+  	    background-image: -ms-linear-gradient(top, #59ff59, #b0ffb5);
+  	    background-image: -o-linear-gradient(top, #59ff59, #b0ffb5);
+  	    background-image: linear-gradient(to bottom, #59ff59, #b0ffb5);
+	    opacity: 1.0;
+	}
+	
+	.write {
+		display: block;
+		text-align: center;
+		font-size: 36px;
+		color: #ffffff;
+		padding: 26px;
+	}
+</style>
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+<script src="js/core.js"></script>
+</head>
+<body>
+<div id="wrap">
+	<input id="hdr-toggle" type="checkbox" />
+	<div id="hdr-wrap">
+	    <div id="main-hdr">
+	        <a class="hdr-left" href="main.html">MANA</a>
+	        <a id="login-case" class="hdr-center" href="login.html">로그인</a>
+	        <a id="logout-case" class="hdr-right-center" onclick="logout()">로그아웃</a>
+	        <label class="hdr-right" for="hdr-toggle" onclick=" "></label>
+	    </div>
+	    <div id="hdr-gnb-wrap">
+	        <div id="hdr-gnb">
+	            <ul>
+	                <li><a href="aboutus.html">About us</a></li>
+	                <li><a href="map.html">Map</a></li>
+	                <li><a href="booklist.html">Book List</a></li>
+	                <li><a href="community/list.jsp">Community</a></li>
+	                <li><a href="event.html">Event</a></li>
+	                <li><a href="request.html">Story Request</a></li>
+	            </ul>
+	        </div>
+	    </div>
+	</div>
+	
+	<div id="content-wrap">
+		<div id="book-register" class="mtop-10">
+			<a href="bookRegister.html">
+				<span class="write"><strong>책 등록하기</strong></span>
+			</a>
+		</div>
+	</div>
+</div>
+</body>
+</body>
+</html>
+
+<script type="text/javascript">
+$(document).ready(function() {
+	AJAX.call("jsp/session.jsp", null, function(data) {
+		var id = data.trim();
+		if (id == "NA") {
+			window.location.href = "login.html";
+		}
+		else {
+			document.getElementById('login-case').innerHTML = id;
+			document.getElementById('login-case').onclick = function(e) { location.href='mypage.html'; }
+			document.getElementById('logout-case').style.display = 'block';
+			rightCheck(id);
+		}
+	});
+});
+
+function rightCheck(id) {
+	if(id == "1111") {
+		document.getElementById('book-register').style.display = 'block';
+	}
+	else {
+		document.getElementById('book-register').style.display = 'none';
+	}
+}
+
+function logout() {
+	if(confirm("로그아웃하시겠습니까?") == true) {
+		/* 먼저 로그아웃 리퀘스트를 날리고 성공적으로 완료한 후 function을 실행, 즉 로그아웃 완료 후 로그인 페이지로 이동 */
+		AJAX.call("jsp/logout.jsp", null, function(data) {
+			window.location.href = "login.html"
+		});
+		
+		/* AJAX.call("jsp/logout.jsp");  비동기적이기 때문에 로그아웃 리퀘스트를 날리고, 로그인페이지로 이동, 로그아웃이 되기 전에 로그인페이지로 이동하기 때문에 익셉션이 일어남*/
+		/* window.location.href = "login.html" */
+	}
+}
+</script>

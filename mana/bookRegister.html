@@ -1,0 +1,156 @@
+<html>
+<head>
+<meta name=viewport content="width=device-width, initial-scale=1, user-scalable=0">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet"> 
+<link href="https://fonts.googleapis.com/css?family=Bungee+Shade" rel="stylesheet">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+<link rel="stylesheet" href="css/bookregister.css">
+<link rel="stylesheet" href="css/core.css">
+<link rel="stylesheet" href="css/core2.css" media="only screen and (min-width:800px)">
+<title>MANA BOOK REGISTER</title>
+<style>
+	.image-pane {
+		float: left;
+		width: 100%;
+		min-height: 150px;
+		padding: 5px;
+		background-color: white;
+		box-sizing: border-box;
+		border: 1px solid #ddd;
+		border-radius: 10px;
+	}
+</style>
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+</head>
+<body>
+<div id="wrap">
+    <div id="main_header">
+		<h1 class="h_logo">
+		    <a href="main.html">MANA</a>
+		    <span>마음을 나누는 공간</span>
+		</h1>
+	</div>
+	<div>
+		<table class="tb" width="100%">
+			<tr>
+				<td>
+					<table width="100%">
+				    	<tr height="10"></tr>
+						<tr class="hdr-tr">
+							<td>&nbsp;</td>
+							<td align="center">&nbsp;&nbsp;TITLE&nbsp;&nbsp;</td>
+							<td><input id="title" class="input" size="50" maxlength="100" autofocus></td>
+							<td>&nbsp;</td>
+						</tr>
+						<tr height="2" bgcolor="#dddddd"><td colspan="4" width="100%"></td></tr>
+						<tr class="hdr-tr">
+							<td>&nbsp;</td>
+							<td align="center">&nbsp;&nbsp;AUTHOR&nbsp;&nbsp;</td>
+							<td><input id="author" class="input" size="50" maxlength="50"></td>
+							<td>&nbsp;</td>
+						</tr>
+						<tr height="2" bgcolor="#dddddd"><td colspan="4" width="100%"></td></tr>
+						<tr id="hdr-memo" class="hdr-tr">
+							<td>&nbsp;</td>
+							<td align="center">&nbsp;&nbsp;내용&nbsp;&nbsp;</td>
+							<td><textarea id="--desc" class="memo" cols="50" rows="13"></textarea></td>
+							<td>&nbsp;</td>
+						</tr>
+						<tr height="2" bgcolor="#dddddd"><td colspan="4" width="100%"></td></tr>
+						<tr class="form-txbn hdr-tr">
+							<td>&nbsp;</td>
+							<td align="center">&nbsp;&nbsp;이미지&nbsp;&nbsp;</td>
+							<td><div id="--img-pane" class="image-pane mtop-10 mbot-20"></div></td>
+							<td>&nbsp;</td>
+						</tr>
+						<tr height="2" bgcolor="#dddddd"><td colspan="4" width="100%"></td></tr>
+						<tr>
+						</tr>
+						<tr height="1" bgcolor="#dddddd"><td colspan="4"></td></tr>
+						<tr height="3" bgcolor="#82B5DF"><td colspan="4"></td></tr>
+						<tr align="center" height="60">
+							<td>&nbsp;</td>
+							<td colspan="2">
+								<input class="btn" type=button value="등록" onclick="upload()">
+								<input class="btn" type=button value="취소" onclick="history.back()">
+								<input class="btn" type=button value="사진추가" onclick="openImage()">
+							</td>
+							<td>&nbsp;</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+		</table>
+	</div>
+</div>
+</body>
+</html>
+<script src="js/core.js"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+	AJAX.call("jsp/session.jsp", null, function (data) {
+		var id = data.trim();
+		if (id == "NA") {
+			window.location.href = "login.html";
+		}
+		else {
+			start(id);
+		}
+	});
+});
+
+var pagectx = {};
+function start(id) {
+	pagectx.id = id;
+	
+	ImageUploader.init("#--img-pane");
+}
+
+function openImage() {
+	ImageUploader.open();
+}
+
+function upload() {
+	if(writeCheck() == false) return;
+	// make the HTTP request in a form of the "Form data"
+	var params = new FormData();
+	params.append("id", pagectx.id);
+	params.append("desc", $("#--desc").val().trim());
+
+	var images = ImageUploader.get();
+	for(var i=0; i<images.length; i++) {
+		params.append("image", images[i]);
+	}
+	
+	AJAX.formCall("jsp/write.jsp", params, function(data) {
+		alert("작성글을 업로드하였습니다.");
+		history.back();
+	});
+}
+
+function writeCheck() {
+	var title = $("#title").val();
+	if(title == "") {
+		alert("제목을 입력해주세요.");
+		return false;
+	}
+	
+	var author = $("#author").val();
+	if(author == "") {
+		alert("저자명을 입력해주세요.");
+		return false;
+	}
+	
+	var story = $("#--desc").val().trim();
+	if(story == "") {
+		alert("줄거리를 입력해주세요.");
+		return false;
+	}
+	
+	return true;
+}
+</script>

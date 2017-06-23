@@ -1,0 +1,841 @@
+<html>
+<head>
+<meta name=viewport content="width=device-width, initial-scale=1, user-scalable=0">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="https://fonts.googleapis.com/css?family=Bowlby+One" rel="stylesheet"> 
+<link href="https://fonts.googleapis.com/css?family=Pacifico" rel="stylesheet"> 
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+<link rel="stylesheet" href="owlcarousel/owl.carousel.min.css">
+<link rel="stylesheet" href="owlcarousel/owl.theme.default.min.css">
+<link rel="stylesheet" href="owlcarousel/animate.css">
+<link rel="stylesheet" href="css/core.css">
+<link rel="stylesheet" href="css/core2.css" media="only screen and (min-width:480px)">
+<link rel="stylesheet" href="css/bs-carousel.css">
+<title>MANA 마음을 나누는 이야기</title>
+<!-- 토글 클릭시 컨텐트 랩 CSS -->
+<style>
+	#content-wrap {
+		-moz-transition: margin 300ms cubic-bezier(0.17, 0.04, 0.03, 0.94);
+		transition: margin 300ms cubic-bezier(0.17, 0.04, 0.03, 0.94);
+	}
+	#hdr-toggle:checked ~ #content-wrap {
+		margin-top: 420px;
+	}
+</style>
+<!-- 메인 헤더 CSS -->
+<style>
+	#hdr-toggle { display: none; }
+	#hdr-wrap { position: relative; }
+
+	#main-hdr {
+		width: 100%;
+		height: 60px;
+		
+		position: relative;
+		line-height: 60px;
+		
+		z-index: 9999;
+		
+		border-bottom: 1px solid #e5e5e5;
+		
+		
+		-webkit-box-shadow: 0 1px 2px rgba(0,0,0,.05);
+		-moz-box-shadow: 0 1px 2px rgba(0,0,0,.05);
+		box-shadow: 0 1px 2px rgba(0,0,0,.05);
+		
+		background: #3fe5e8;
+		background-image: -webkit-linear-gradient(top, #3fe5e8, #aee8e5);
+		background-image: -moz-linear-gradient(top, #3fe5e8, #aee8e5);
+		background-image: -ms-linear-gradient(top, #3fe5e8, #aee8e5);
+		background-image: -o-linear-gradient(top, #3fe5e8, #aee8e5);
+		background-image: linear-gradient(to bottom, #3fe5e8, #aee8e5);
+	}
+
+	#main-hdr > a, #main-hdr > label {
+		display: block;
+		height: 100%;
+		position: absolute;
+	}
+
+	#main-hdr > a.hdr-left {
+		width: 110px;
+		left: 20px;
+		
+		color: #ffffff;
+		font-size: 25px;
+		font-weight: bold;
+		line-height: 59px;
+		text-align: center;
+	}
+
+	/* 로그인 혹은 아이디 */
+	#main-hdr > a.hdr-center {
+		width: 80px;
+		right: 180px;
+		
+		color: #ffffff;
+		font-size: 16px;
+		font-weight: bold;
+		line-height: 59px;
+		text-align: center;
+		cursor: pointer
+	}
+	
+	/* 로그아웃 */
+	#main-hdr > a.hdr-right-center {
+		display: none;
+		width: 80px;
+		right: 100px;
+		
+		color: #ffffff;
+		font-size: 16px;
+		font-weight: bold;
+		line-height: 59px;
+		text-align: center;
+		cursor: pointer;
+	}
+
+	/* 드롭 다운 */
+	#main-hdr > label.hdr-right {
+		right: 20px;
+		width: 80px;
+		
+		color: #ffffff;
+		font-size: 18px;
+		font-weight: bold;
+		text-align: center;
+		line-height: 59px;
+		cursor: pointer;
+		
+		-moz-transition: all 500ms ease;
+		transition: all 500ms ease;
+	}
+	#hdr-toggle { display: none; cursor: pointer; }
+	#hdr-toggle + #hdr-wrap > #main-hdr > label:after {
+		content:"더 보기"
+	}
+
+	#hdr-gnb-wrap {
+		position: absolute;
+		top: -570px;
+		
+		width: 100%;
+		max-height: 360px;
+		
+		-webkit-box-shadow: 0 1px 2px rgba(0,0,0,.05);
+		-moz-box-shadow: 0 1px 2px rgba(0,0,0,.05);
+		box-shadow: 0 1px 2px rgba(0,0,0,.05);
+		
+		background: #3fe5e8;
+		background-image: -webkit-linear-gradient(top, #3fe5e8, #aee8e5);
+		background-image: -moz-linear-gradient(top, #3fe5e8, #aee8e5);
+		background-image: -ms-linear-gradient(top, #3fe5e8, #aee8e5);
+		background-image: -o-linear-gradient(top, #3fe5e8, #aee8e5);
+		background-image: linear-gradient(to bottom, #3fe5e8, #aee8e5);
+		
+		-moz-transition: top 300ms cubic-bezier(0.17, 0.04, 0.03, 0.94);
+		transition: top 300ms cubic-bezier(0.17, 0.04, 0.03, 0.94);
+	}
+
+	#hdr-toggle:checked + #hdr-wrap > #hdr-gnb-wrap {
+		top: 60px;
+	}
+	
+	#hdr-toggle:checked + #hdr-wrap > #main-hdr > label:after {
+		content:"닫기"
+	}
+
+	#hdr-gnb > ul > li > a {
+		display: block;
+		width: 100%;
+		height: 60px;
+		padding: 10px;
+		padding-left: 30px;
+		line-height: 40px;
+		
+		color: #ffffff;
+		font-size: 18px;
+		font-weight: bold;
+		
+		border: 1px solid #e5e5e5;
+	}
+</style>
+<!-- 시간(분) 선택 부분 CSS -->
+<style>
+	.hash-box { width: 100%; overflow: hidden; }
+	.hash-box > div {
+		display: block;
+		width: 16%;
+		height: 60px;
+		margin-right: 2%;
+		float: left;
+		font-weight: bold;
+		font-style: italic;
+		opacity: 0.9;
+		-webkit-border-radius: 28px;
+		-moz-border-radius: 28px;
+		border-radius: 28px;
+		box-sizing: border-box;
+		text-align: center;
+		
+		background: #3fe5e8;
+		background-image: -webkit-linear-gradient(top, #3fe5e8, #aee8e5);
+		background-image: -moz-linear-gradient(top, #3fe5e8, #aee8e5);
+		background-image: -ms-linear-gradient(top, #3fe5e8, #aee8e5);
+		background-image: -o-linear-gradient(top, #3fe5e8, #aee8e5);
+		background-image: linear-gradient(to bottom, #3fe5e8, #aee8e5);
+	}
+	.hash-box > div:hover {
+		background: #49dded;
+		background-image: -webkit-linear-gradient(top, #49dded, #3758e8);
+		background-image: -moz-linear-gradient(top, #49dded, #3758e8);
+		background-image: -ms-linear-gradient(top, #49dded, #3758e8);
+		background-image: -o-linear-gradient(top, #49dded, #3758e8);
+		background-image: linear-gradient(to bottom, #49dded, #3758e8);
+		text-decoration: none;
+	}
+	.hash-box > div:nth-of-type(1) { margin-left : 24%; }
+	.hash-box > div:nth-of-type(3) { margin-right: 24%; }
+	.hash-box > div > a.custom-btn {
+		display: block;
+		font-size: 23px;
+		font-family: 'Pacifico', cursive;
+		color: #fff;
+		line-height: 56px;
+	}
+	
+	.custom-item {
+		height: 400px;
+	}
+	
+	.phrase {
+		color: #F6F6F6 !important;
+	}
+	.slide-content {
+		width: 90%; height: 100%;
+		margin: 20px auto 0;
+		
+		color: #4C4C4C;
+		font-family: 'Bowlby One', cursive;
+		border: 2px solid #e5e5e5;
+		-webkit-border-radius: 5px;
+		-moz-border-radius: 5px;
+		border-radius: 5px;
+		background: #000000;
+		-webkit-transition: all 0.35s ease;
+		-moz-transition: all 0.35s ease;
+		transition: all 0.35s ease;
+	
+		position: relative;
+	}
+	.slide-content:hover { color: #ffffff; }
+	.slide-content:hover img {
+		opacity: .6;
+	}
+	.slide-content:hover p.drop {
+				bottom: 42px;
+                -webkit-transition: all 0.5s ease;
+                -moz-transition: all 0.5s ease;
+                transition: all 0.5s ease;
+	}
+	.slide-txt {
+		position: absolute;
+	}
+	h3.slide-txt {
+		left: 13%; top: 10%;
+		font-size: 3em;
+	}
+	h5.slide-txt {
+		left: 12%; top: 40%;
+		font-size: 1.5em;
+	}
+	p.slide-txt {
+		left: 12%; top: 60%;
+		font-size: 1.5em;
+	}
+	p.drop {
+		right: 8%;
+		position: absolute;
+		bottom: -200px;
+		
+		font-size: 32px;
+		font-weight: bold;
+	}
+</style>
+<!-- 책 스토리 문의 CSS -->
+<style>
+	.story-request {
+	    width: 100%; height: 120px;
+	    margin-bottom: 3px;
+
+	    border : 1px solid #e5e5e5;
+	    background-color: #F8F8F8;
+
+	    -webkit-border-radius: 5px;
+        -moz-border-radius: 5px;
+        border-radius: 5px;
+	}
+
+	.story-request > a {
+	    display: block;
+	    width: 99%; height: 106px;
+		margin: 6px auto 0;
+
+        -webkit-border-radius: 5px;
+        -moz-border-radius: 5px;
+        border-radius: 5px;
+
+	    -webkit-box-shadow: 0px 0px 10px #ffffff;
+	    -moz-box-shadow: 0px 0px 10px #ffffff;
+	    box-shadow: 0px 0px 10px #ffffff;
+
+	    background: #3fe5e8;
+            background-image: -webkit-linear-gradient(top, #3fe5e8, #aee8e5);
+            background-image: -moz-linear-gradient(top, #3fe5e8, #aee8e5);
+            background-image: -ms-linear-gradient(top, #3fe5e8, #aee8e5);
+            background-image: -o-linear-gradient(top, #3fe5e8, #aee8e5);
+            background-image: linear-gradient(to bottom, #3fe5e8, #aee8e5);
+
+	    font-family: 'Roboto', sans-serif;
+	}
+
+	.story-request > a:hover {
+	    background: #59ff59;
+  	    background-image: -webkit-linear-gradient(top, #59ff59, #b0ffb5);
+  	    background-image: -moz-linear-gradient(top, #59ff59, #b0ffb5);
+  	    background-image: -ms-linear-gradient(top, #59ff59, #b0ffb5);
+  	    background-image: -o-linear-gradient(top, #59ff59, #b0ffb5);
+  	    background-image: linear-gradient(to bottom, #59ff59, #b0ffb5);
+	    opacity: 1.0;
+	}
+	
+	@media (max-width: 767px) {
+		.split-1 {
+		    display: block;
+		    text-align: left;
+		    font-size: 25px;
+		    color: #ffffff;
+		    padding: 12px 12px 10px 50px;
+		}	
+		.split-2 {
+		    display: block;
+		    text-align: right;
+		    font-size: 25px;
+		    color: #ffffff;
+		    padding: 0px 50px 2px 10px;
+		}
+		.merge-1 { display: none; }
+	}
+	@media (min-width: 767px) {
+		.split-1 { display: none; }
+		.split-2 { display: none; }
+		.merge-1 {
+			display: block;
+			text-align: center;
+			font-size: 36px;
+			color: #ffffff;
+			padding: 26px;
+		}
+	}
+</style>
+<!-- 프로필 사진 CSS -->
+<style>
+	.developer_info {
+		width: 100%;
+		height: 426px;
+		
+		border: 1px solid #ddd;
+		
+		-webkit-border-radius: 5px;
+		-moz-border-radius: 5px;
+		border-radius: 5px;
+		
+		background: #ffffff;
+		position: relative;
+	}
+	
+	.top_box {
+		position: relative;
+		margin: 5px auto 0;
+		
+		width: 99%;
+		height: 70px;   /* 204 */
+		
+		border: 1px solid #ddd;
+		border-bottom-color: #ffffff;
+		
+		-webkit-border-radius: 5px 5px 0px 0px;
+		-moz-border-radius: 5px 5px 0px 0px;
+		border-radius: 5px 5px 0px 0px;
+		
+		background: #3fe5e8;
+		background-image: -webkit-linear-gradient(top, #3fe5e8, #aee8e5);
+		background-image: -moz-linear-gradient(top, #3fe5e8, #aee8e5);
+		background-image: -ms-linear-gradient(top, #3fe5e8, #aee8e5);
+		background-image: -o-linear-gradient(top, #3fe5e8, #aee8e5);
+		background-image: linear-gradient(to bottom, #3fe5e8, #aee8e5);
+	}
+	.photo {
+		position: absolute;
+		left: 50%;
+		top: 95%;
+		margin: -50px 0 0  -50px;
+		border: 2px solid #51D2B7;
+		border-radius: 50%;
+		
+		overflow: hidden;
+	}
+	
+	.info_box {
+		margin: 0 auto;
+		
+		width: 99%;
+		height: 134px;
+		text-align: center;
+		
+		border: 1px solid #ddd;
+		border-top-color: #ffffff;
+		
+		-webkit-border-radius: 0px 0px 5px 5px;
+		-moz-border-radius: 0px 0px 5px 5px;
+		border-radius: 0px 0px 5px 5px;
+		
+		background: #F3F3F3;
+	}
+	.info_box > h4 { margin-top: 60px; }
+	.name {
+		width: 100%;
+	}
+</style>
+<!-- 푸터 영역 -->
+<style>
+	#footer {
+		width: 100%;
+		height: 200px;
+		background: #e6ede6;
+	}
+	#footer > span {
+		display: block;
+		padding: 30px;
+		font-size: 22px;
+		font-weight: bold;
+		text-align: center;
+	}
+</style>
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+<script src="owlcarousel/owl.carousel.min.js"></script>
+<script src="owlcarousel/jquery.mousewheel.js"></script>
+<script src="js/core.js"></script>
+</head>
+<body>
+<div id="wrap">
+<!-- 헤더 영역 -->
+<input id="hdr-toggle" type="checkbox" />
+<div id="hdr-wrap">
+    <div id="main-hdr">
+        <a class="hdr-left" href="main.html">MANA</a>
+        <a id="login-case" class="hdr-center" href="login.html">로그인</a>
+        <a id="logout-case" class="hdr-right-center" onclick="logout()">로그아웃</a>
+        <label class="hdr-right" for="hdr-toggle" onclick=" "></label>
+    </div>
+    <div id="hdr-gnb-wrap">
+        <div id="hdr-gnb">
+            <ul>
+                <li><a href="aboutus.html">About us</a></li>
+                <li><a href="map.html">Map</a></li>
+                <li><a href="booklist.html">Book List</a></li>
+                <li><a href="community/list.jsp">Community</a></li>
+                <li><a href="event.html">Event</a></li>
+                <li><a href="request.html">Story Request</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<!-- 섹션 영역 -->
+<div id="content-wrap">
+	<!-- 시간(분) 선택 -->
+	<div class="time-choice mtop-20">
+		<div class="hash-box">
+			<div><a class="button secondary url custom-btn" href="#one">1min</a></div>
+			<div><a class="button secondary url custom-btn" href="#two">5min</a></div>
+			<div><a class="button secondary url custom-btn" href="#three">10min</a></div>
+		</div>
+		<div class="owl-carousel owl-theme">
+		    <div class="item custom-item" data-hash="one">
+		    	<div class="slide-content phrase" onclick="a1min()">
+		    		<a href="#"><img src="images/poet-5.jpg" width=100% height=100% alt=""></a>
+		    		<h3 class="slide-txt">좋은 글귀&nbsp;Good Phrase</h3>
+		    		<h5 class="slide-txt">1분의 기다림</h5>
+		    		<p class="slide-txt">명언 , 따뜻한 말과 함께</p>
+		    		<p class="drop">CLICK!!</p>
+		    	</div>
+		    </div>
+		    <div class="item custom-item" data-hash="two">
+		    	<div class="slide-content" onclick="a5min()">
+		    		<a href="#"><img src="images/poet-1.jpg" width=100% height=100% alt=""></a>
+		    		<h3 class="slide-txt">시&nbsp;Poet</h3>
+		    		<h5 class="slide-txt">5분의 기다림</h5>
+		    		<p class="slide-txt">시 한편 보시는건 어떨까요?</p>
+		    		<p class="drop">CLICK!!</p>
+		    	</div>
+		    </div>
+		    <div class="item custom-item" data-hash="three">
+		    	<div class="slide-content" onclick="a10min()">
+		    		<a href="#"><img src="images/novel.jpg" width=100% height=100% alt=""></a>
+		    		<h3 class="slide-txt">단편소설&nbsp;Short Story</h3>
+		    		<h5 class="slide-txt">10분의 기다림</h5>
+		    		<p class="slide-txt">소설을 조금 읽어 보시는건 어떨까요?</p>
+		    		<p class="drop">CLICK!!</p>
+		    	</div>
+		    </div>
+		</div>
+	</div>
+	<!-- 시간(분) 선택 끝 -->
+	
+	<!-- 스토리 요청 -->
+	<div class="story-request mtop-10">
+		<a href="request.html">
+			<span class="split-1"><strong>추천하고 싶은 이야기를</strong></span>
+			<span class="split-2"><strong>여기로 보내주세요!</strong></span>
+			<span class="merge-1"><strong>추천하고 싶은 이야기를 여기로 보내주세요!</strong></span>
+		</a>
+	</div>
+	<!-- 스토리 요 끝 -->
+	
+	<!-- 북 리스트 -->
+	<div class="book-gallery mtop-10">
+		<div class="book-outline">
+			<!-- 캐러셀 부분 -->
+			<div class="gallery-wrap">
+				<ul class="gallery-tab">
+					<li role="presentation" class="active"><a href="#pane_1" aria-controls="pane_1" role="tab" data-toggle="tab">시</a></li>
+					<li role="presentation"><a href="#pane_2" aria-controls="pane_2" role="tab" data-toggle="tab">에세이</a></li>
+					<li role="presentation"><a href="#pane_3" aria-controls="pane_3" role="tab" data-toggle="tab">단편소설</a></li>
+				</ul>
+				<!-- 탭 내용 -->
+				<div class="tab-content">
+					<div role="tabpanel" class="tab-pane active" id="pane_1">
+						<div class="col-md-12">
+							<div class="carousel slide" data-ride="carousel" data-type="multi" id="myCarousel-1">
+								<div class="carousel-inner">
+									<!-- Slide 1 -->
+									<div class="item active">
+										<div class="col-md-12 col-sm-12 col-xs-12">
+											<ul class="thumbnails">
+												<li class="thumb-width">
+													<div class="fff">
+														<div class="thumbnail">
+															<a href="booklist.html"><img src="images/book-poet-1.jpg" width=250 height=300 alt=""></a>
+														</div>
+														<div class="caption">
+															<h4> 김소월 </h4>
+															<p> 진달래꽃 등.... </p>
+															<a class="btn btn-mini" href="booklist.html">» Read More</a>
+														</div>
+													</div>
+												</li>
+											</ul>
+										</div>
+									</div>
+									<!-- Slide 2 -->
+									<div class="item">
+										<div class="col-md-12 col-sm-12 col-xs-12">								
+											<ul class="thumbnails">
+												<li class="thumb-width">
+													<div class="fff">
+														<div class="thumbnail">
+															<a href="booklist.html"><img src="images/book-poet-2.jpg" width=250 height=300 alt=""></a>
+														</div>
+														<div class="caption">
+															<h4> 윤동주 </h4>
+															<p> 별 헤는 밤 등...</p>
+															<a class="btn btn-mini" href="booklist.html">» Read More</a>
+														</div>
+													</div>
+												</li>
+											</ul>
+										</div>
+									</div>
+									<!-- Slide 3 -->
+									<div class="item">
+										<div class="col-md-12 col-sm-12 col-xs-12">								
+											<ul class="thumbnails">
+												<li class="thumb-width">
+													<div class="fff">
+														<div class="thumbnail">
+															<a href="booklist.html"><img src="images/book-poet-3.jpg" width=250 height=300 alt=""></a>
+														</div>
+														<div class="caption">
+															<h4> 백석 </h4>
+															<p> 사슴 등...</p>
+															<a class="btn btn-mini" href="booklist.html">» Read More</a>
+														</div>
+													</div>
+												</li>
+											</ul>
+										</div>
+									</div>
+								</div>
+								<a class="left carousel-control" href="#myCarousel-1" data-slide="prev"><i class="glyphicon glyphicon-chevron-left"></i></a>
+							  	<a class="right carousel-control" href="#myCarousel-1" data-slide="next"><i class="glyphicon glyphicon-chevron-right"></i></a>
+							</div>
+						</div>					
+					</div>
+					
+					<!-- panel 2 -->
+					<div role="tabpanel" class="tab-pane" id="pane_2">
+						<div class="col-md-12">
+							<div class="carousel slide" data-ride="carousel" data-type="multi" id="myCarousel-2">
+								<div class="carousel-inner">
+									<!-- Slide 1 -->
+									<div class="item active">
+										<div class="col-md-12 col-sm-12 col-xs-12">
+											<ul class="thumbnails">
+												<li class="thumb-width">
+													<div class="fff">
+														<div class="thumbnail">
+															<a href="booklist.html"><img src="images/essay-1.jpg" width=250 height=300 alt=""></a>
+														</div>
+														<div class="caption">
+															<h4> 너에게 하고 싶은 말 </h4>
+															<p> 김수민 </p>
+															<a class="btn btn-mini" href="booklist.html">» Read More</a>
+														</div>
+													</div>
+												</li>
+											</ul>
+										</div>
+									</div>
+									<!-- Slide 2 -->
+									<div class="item">
+										<div class="col-md-12 col-sm-12 col-xs-12">								
+											<ul class="thumbnails">
+												<li class="thumb-width">
+													<div class="fff">
+														<div class="thumbnail">
+															<a href="booklist.html"><img src="images/essay-2.jpg" width=250 height=300 alt=""></a>
+														</div>
+														<div class="caption">
+															<h4> 문제가 있습니다 </h4>
+															<p> 사노 요코 </p>
+															<a class="btn btn-mini" href="booklist.html">» Read More</a>
+														</div>
+													</div>
+												</li>
+											</ul>
+										</div>
+									</div>
+									<!-- Slide 3 -->
+									<div class="item">
+										<div class="col-md-12 col-sm-12 col-xs-12">								
+											<ul class="thumbnails">
+												<li class="thumb-width">
+													<div class="fff">
+														<div class="thumbnail">
+															<a href="booklist.html"><img src="images/essay-3.jpg" width=250 height=300 alt=""></a>
+														</div>
+														<div class="caption">
+															<h4> 서정희 </h4>
+															<p> 정희 </p>
+															<a class="btn btn-mini" href="booklist.html">» Read More</a>
+														</div>
+													</div>
+												</li>
+											</ul>
+										</div>
+									</div>
+								</div>
+								<a class="left carousel-control" href="#myCarousel-2" data-slide="prev"><i class="glyphicon glyphicon-chevron-left"></i></a>
+							  	<a class="right carousel-control" href="#myCarousel-2" data-slide="next"><i class="glyphicon glyphicon-chevron-right"></i></a>
+							</div>
+						</div>		
+					</div> 
+					
+					<!-- panel 3 -->
+					<div role="tabpanel" class="tab-pane" id="pane_3">
+						<div class="col-md-12">
+							<div class="carousel slide" data-ride="carousel" data-type="multi" id="myCarousel-3">
+								<div class="carousel-inner">
+									<!-- Slide 1 -->
+									<div class="item active">
+										<div class="col-md-12 col-sm-12 col-xs-12">
+											<ul class="thumbnails">
+												<li class="thumb-width">
+													<div class="fff">
+														<div class="thumbnail">
+															<a href="booklist.html"><img src="images/namiya.jpg" width=250 height=300 alt=""></a>
+														</div>
+														<div class="caption">
+															<h4> 나미야 잡화점의 기적 </h4>
+															<p> 히가시노 게이고 </p>
+															<a class="btn btn-mini" href="booklist.html">» Read More</a>
+														</div>
+													</div>
+												</li>
+											</ul>
+										</div>
+									</div>
+									<!-- Slide 2 -->
+									<div class="item">
+										<div class="col-md-12 col-sm-12 col-xs-12">								
+											<ul class="thumbnails">
+												<li class="thumb-width">
+													<div class="fff">
+														<div class="thumbnail">
+															<a href="booklist.html"><img src="images/wordwar.jpg" width=250 height=300 alt=""></a>
+														</div>
+														<div class="caption">
+															<h4> 글자 전쟁 </h4>
+															<p> 김진명 </p>
+															<a class="btn btn-mini" href="booklist.html">» Read More</a>
+														</div>
+													</div>
+												</li>
+											</ul>
+										</div>
+									</div>
+									<!-- Slide 3 -->
+									<div class="item">
+										<div class="col-md-12 col-sm-12 col-xs-12">								
+											<ul class="thumbnails">
+												<li class="thumb-width">
+													<div class="fff">
+														<div class="thumbnail">
+															<a href="booklist.html"><img src="images/ppy.jpg" width=250 height=300 alt=""></a>
+														</div>
+														<div class="caption">
+															<h4> 파피용 </h4>
+															<p> 베르나르 베르나르 </p>
+															<a class="btn btn-mini" href="booklist.html">» Read More</a>
+														</div>
+													</div>
+												</li>
+											</ul>
+										</div>
+									</div>
+								</div>
+								<a class="left carousel-control" href="#myCarousel-3" data-slide="prev"><i class="glyphicon glyphicon-chevron-left"></i></a>
+							  	<a class="right carousel-control" href="#myCarousel-3" data-slide="next"><i class="glyphicon glyphicon-chevron-right"></i></a>
+							</div>
+						</div>					
+					</div>
+				</div>
+			</div>
+			<!-- 캐러셀 부분 끝 -->
+		</div>
+	</div>
+	<!-- 북리스트 끝 -->
+	
+	<!-- 프로필 사진 부분 -->
+	<div class="developer_info mtop-10">
+		<div class="top_box">
+			<div class="photo">
+				<img src="images/profile.jpg" width=94 height=94 alt="not" />
+			</div>
+		</div>
+		<div class="info_box">
+			<h4 class="name">임종완</h4>
+			<em class="text-success">Web Developer</em>
+		</div>		
+		<div class="top_box">
+			<div class="photo">
+				<img src="images/profile.jpg" width=94 height=94 alt="not" />
+			</div>
+		</div>
+		<div class="info_box">
+			<h4 class="name">고우영</h4>
+			<em class="text-success">Web Designer</em>
+		</div>
+	</div>
+	<!-- 프로필 사진 끝 -->
+</div>
+
+<!-- 푸터 영역 -->
+<div id="footer">
+	<span>Copyright 2017</span>
+</div>
+</div>
+</body>
+</html>
+
+<script type="text/javascript">
+$(document).ready(function() {
+	
+	AJAX.call("jsp/session.jsp", null, function(data) {
+		var id = data.trim();
+		if (id == "NA") {
+			window.location.href = "login.html";
+		}
+		else {
+			document.getElementById('login-case').innerHTML = id + "님";
+			document.getElementById('login-case').onclick = function(e) { location.href='mypage.html'; }
+			document.getElementById('logout-case').style.display = 'block';
+		}
+	});
+	
+	var owl = $('.owl-carousel');
+    owl.owlCarousel({
+        animateOut: 'slideOutDown',
+        animateIn: 'flipInX',
+    	 items:3,
+        loop:false,
+        margin:10,
+        URLhashListener:true,
+        autoplayHoverPause:true,
+        responsiveClass:true,
+        responsive:{
+        	0:{
+        		items:1,
+        		nav:false
+        	},
+        	600:{
+        		items:1,
+        		nav:false
+        	},
+        	960:{
+        		items:1,
+        		nav:false
+        	},
+        	1200:{
+        		items:1,
+        		nav:false,
+        		loop:true
+        	}
+        }
+    });
+    owl.on('mousewheel', '.owl-stage', function (e) {
+        if (e.deltaY>0) {
+            owl.trigger('next.owl');
+        } else {
+            owl.trigger('prev.owl');
+        }
+        e.preventDefault();
+    });
+});
+
+function logout() {
+	if(confirm("로그아웃하시겠습니까?") == true) {
+		/* 먼저 로그아웃 리퀘스트를 날리고 성공적으로 완료한 후 function을 실행, 즉 로그아웃 완료 후 로그인 페이지로 이동 */
+		AJAX.call("jsp/logout.jsp", null, function(data) {
+			window.location.href = "login.html"
+		});
+		
+		/* AJAX.call("jsp/logout.jsp");  비동기적이기 때문에 로그아웃 리퀘스트를 날리고, 로그인페이지로 이동, 로그아웃이 되기 전에 로그인페이지로 이동하기 때문에 익셉션이 일어남*/
+		/* window.location.href = "login.html" */
+	}
+}
+
+function a1min() {
+	window.location.href= 'a1min.jsp';
+}
+function a5min() {
+	window.location.href= 'a5min.jsp';
+}
+function a10min() {
+	window.location.href= 'a10min.jsp';
+}
+</script>

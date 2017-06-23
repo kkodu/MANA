@@ -1,0 +1,189 @@
+<html>
+<head>
+<meta name=viewport content="width=device-width, initial-scale=1, user-scalable=0">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet"> 
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+<link rel="stylesheet" href="css/signup.css">
+<link rel="stylesheet" href="css/core.css">
+<link rel="stylesheet" href="css/core2.css" media="only screen and (min-width:800px)">
+<title>MANA SIGNUP PAGE</title>
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+<script src="js/core.js"></script>
+</head>
+<body>
+<div id="wrap">
+	<div id="header">
+	<h1 class="logo"><a href="login.html">MANA</a></h1>	
+	</div>
+	<div id="content">
+		<div id="content_deco">
+			<div class="img_wrap">
+				<img src="images/ribbon4.png" alt="not" />
+			</div>
+			<input id="uid" class="id" type="text" placeholder="아이디" autofocus onblur="checkID()"><span id="idcheck"></span>
+			<input id="pswdc" class="psw" type="password" placeholder="비밀번호" onblur="checkValue()">
+			<input id="pswdCheck" class="psw" type="password" placeholder="비밀번호 확인" onblur="checkvalue()"><span id="same"></span>
+			<input id="nmid" class="nm" type="text" placeholder="이름">
+			<input id="nicknm" type="text" placeholder="별명 (아이디 찾기시 필요)">
+			<input id="mail" type="email" placeholder="이메일" onblur="email()">
+		</div>
+	</div>
+	<div id="fillout">
+		<div class="btn_signup" onclick="signup()">가입하기</div>
+	</div>
+</div>
+</body>
+</html>
+
+<script type="text/javascript">
+$(document).ready(function() {
+	
+});
+
+function checkID() {
+	var chek = $("#uid").val();
+	if(chek == "") {
+		document.getElementById('idcheck').innerHTML='번호를 입력해주세요.';
+		document.getElementById('idcheck').style.color='#FF5A5A';
+		document.getElementById('pswdc').style.margin='30px auto 0px';
+	} else {
+		/* signup logic ...                                                      */
+		/* var elem = document.getParameterById("uid"); 아래와 같음, 소스가 너무 길다.. */
+		/* $("#uid").val() --> JQUERY가 형식을 더욱 간단하게 만들어줌                      */
+		var params = "uid=" + $("#uid").val();
+		/* 1111, asdf 입력 시 -> uid=1111 & upass=asdf 가 params 변수에 저장 */
+		/* AJAX 객체 안의 call함수를 호출 -> url, params(인자), 성공했을 시 호출하는 callback함수 */
+		AJAX.call("jsp/idcheck.jsp", params, function(data) {
+			if(data.trim()=="NO") {
+				document.getElementById('idcheck').innerHTML='중복되는 아이디입니다.';
+				document.getElementById('idcheck').style.color='#FF5A5A';
+				document.getElementById('pswdc').style.margin='30px auto 0px';
+				document.getElementById('uid').value = "";
+			} else if(data.trim()=="YES"){
+				document.getElementById('idcheck').innerHTML='사용하실 수 있는 아이디입니다.';
+				document.getElementById('idcheck').style.color='white';
+				document.getElementById('pswdc').style.margin='30px auto 0px';
+			}
+		});
+	}
+}
+
+function checkValue() {
+	var pass1 = $("#pswdc").val();
+	var pass2 = $("#pswdCheck").val();
+	
+	if(pass1=="" && pass2=="") {
+		document.getElementById('same').innerHTML='비밀번호를 입력해주세요.';
+		document.getElementById('same').style.color='#FF5A5A';
+		document.getElementById('nmid').style.margin='30px auto 0px';
+	}
+	else if(pass1 != pass2) {
+		document.getElementById('same').innerHTML='비밀번호를 확인해주세요';
+		document.getElementById('same').style.color='#FF5A5A';
+		document.getElementById('nmid').style.margin='30px auto 0px';
+		$("#pswdCheck").focus();
+	} else {
+		document.getElementById('same').innerHTML='비밀번호가 일치합니다';
+		document.getElementById('same').style.color='white';
+		document.getElementById('nmid').style.margin='30px auto 0px';
+	}
+}
+
+function checkvalue() {
+	var pass1 = $("#pswdc").val();
+	var pass2 = $("#pswdCheck").val();	
+	if(pass1=="" && pass2=="") {
+		document.getElementById('same').innerHTML='비밀번호를 입력해주세요.';
+		document.getElementById('same').style.color='#FF5A5A';
+		document.getElementById('nmid').style.margin='30px auto 0px';
+	}
+	else if(pass1 != pass2) {
+		document.getElementById('same').innerHTML='비밀번호가 일치하지 않습니다.';
+		document.getElementById('same').style.color='#FF5A5A';
+		document.getElementById('nmid').style.margin='30px auto 0px';
+		$("#pswdCheck").focus();
+	} else {
+		document.getElementById('same').innerHTML='비밀번호가 일치합니다';
+		document.getElementById('same').style.color='white';
+		document.getElementById('nmid').style.margin='30px auto 0px';
+	}
+}
+
+function signup() {
+		if(writeCheck() == false) return;
+
+		var params =	"uid=" + $("#uid").val() +
+						"&upass=" + $("#pswdc").val() +
+						"&uname=" + $("#nmid").val() +
+						"&nicknm=" + $("#nicknm").val() +
+						"&umail=" + $("#mail").val();
+
+		if(confirm("가입하시겠습니까?") == true) {	
+			AJAX.call("jsp/signup.jsp", params, function(data) {
+				window.location.href = "complete.html";
+			});	 
+		}
+	 
+}
+	 
+function writeCheck() {
+
+	var id = $("#uid").val();
+	if(id == "") {
+		alert("아이디를 적어주세요(휴대폰 번호)");
+		return false;
+	}
+	if(isNaN(id) == true) {
+		alert("휴대폰 번호를 입력해주세요 (-빼고)");
+		return false;
+	}
+	
+	var pass = $("#pswdc").val();
+	if(pass == "") {
+		alert("비밀번호를 적어주세요");
+		return false;
+	}
+	
+	var passcheck = $("#pswdCheck").val();
+	if(passcheck == "") {
+		alert("비밀번호를 확인해주세요");
+		return false;
+	}
+	
+	if(pass != passcheck) {
+		alert("비밀번호가 맞는지 확인해주세요");
+		return false;
+	}
+	
+	var name = $("#nmid").val();
+	if(name == "") {
+		alert("이름을 적어주세요");
+		return false;		
+	}
+	
+	var nicknm = $("#nicknm").val();	
+	if(nicknm == "") {
+		alert("별명 적어주세요");
+		return false;
+	}
+	var email = $("#mail").val();
+	var exptext = /^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-Za-z0-9\-]+/;	
+	
+	if(email == "") {
+		alert("이메일을 적어주세요");
+		return false;
+	}
+	
+   	if(exptext.test(email)==false){
+        //이메일 형식이 알파벳+숫자@알파벳+숫자.알파벳+숫자 형식이 아닐경우           
+       alert("이메일형식이 올바르지 않습니다.");   
+       return false;
+    }
+   return true;
+}
+</script>

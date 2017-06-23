@@ -1,0 +1,319 @@
+<html>
+<head>
+<meta name=viewport content="width=device-width, initial-scale=1, user-scalable=0">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet"> 
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+<link rel="stylesheet" href="css/core.css">
+<link rel="stylesheet" href="css/core2.css" media="only screen and (min-width:800px)">
+<title>My Social Network</title>
+<style>
+	.row-fluid {
+	    overflow: hidden;
+	}
+	.test_gallery {
+            float: left;
+            width: 100%; height: 510px;
+            background-color: #F8F8F8;
+            border: 1px solid #e5e5e5;
+
+            -webkit-border-radius: 5px;
+            -moz-border-radius: 5px;
+            border-radius: 5px;
+	}
+
+	.gallery_wrap {
+	    width: 99%; height: 500px;
+	    margin: 4px auto 0;
+
+	    border: 1px solid #e5e5e5;
+            -webkit-border-radius: 5px;
+            -moz-border-radius: 5px;
+            border-radius: 5px;
+
+            background: #3fe5e8;
+            background-image: -webkit-linear-gradient(top, #3fe5e8, #aee8e5);
+            background-image: -moz-linear-gradient(top, #3fe5e8, #aee8e5);
+            background-image: -ms-linear-gradient(top, #3fe5e8, #aee8e5);
+            background-image: -o-linear-gradient(top, #3fe5e8, #aee8e5);
+            background-image: linear-gradient(to bottom, #3fe5e8, #aee8e5);
+	}
+
+	.gallery_tab {
+	    overflow: hidden;
+
+	    width: 99%; height: 40px;
+	    margin: 5px auto 0px;
+
+	    background-color: #F5F5F5;
+
+	    border: 1px solid #ddd;
+	    border-bottom: 0px;
+
+	    -webkit-border-radius: 5px 5px 0px 0px;
+	    -moz-border-radius: 5px 5px 0px 0px;
+	    border-radius: 5px 5px 0px 0px;
+	}
+
+	.gallery_tab > li {
+		width: 20%;
+	    float: left;
+	}
+
+	.gallery_tab > li > a {
+	    display: block;
+	    margin: 5px 0px 0px 5px;
+	    width: 100%; height: 33px;
+
+	    line-height: 33px;
+	    text-align: center;
+	    color: #777;
+	    background-color: #F5F5F5;
+	    
+	    border-bottom: 1px solid #ddd;
+            -webkit-border-radius: 5px 5px 0px 0px;
+            -moz-border-radius: 5px 5px 0px 0px;
+            border-radius: 5px 5px 0px 0px;
+	}
+
+	.gallery_tab > li.active > a {
+	    background-color: #ffffff;
+	    color: #868686;
+	
+	    border: 1px solid #ddd;
+	    border-bottom: 0px;	
+	}
+
+	.tab-content {
+	    width: 99%; height: 450px;
+	    margin: -2px auto 0px;
+	    background-color: #ffffff;
+	    border: 1px solid #ddd;
+	    border-top-color: #ddd;
+
+            -webkit-border-radius: 0px 0px 5px 5px;
+            -moz-border-radius: 0px 0px 5px 5px;
+            border-radius: 0px 0px 5px 5px;
+	}
+
+	.test_width {
+	    float: left;
+	    max-width: 280px;
+	    margin-left: 17px; margin-top: 30px;
+	}
+
+	.thumbnails { margin-bottom: 0px; }
+
+	.thumbnails li> .fff .caption { 
+    	    background:#fff !important; 
+    	    padding:10px
+	}
+
+	.caption h4 {
+    	    color: #444;
+	}
+
+	.caption p {  
+    	    color: #999;
+	}
+	
+	.carousel-control     		 { width:  4%; }
+	.carousel-control.left,.carousel-control.right {margin-left:15px;background-image:none;}
+	@media (max-width: 767px) {
+		.carousel-inner .active.left { left: -100%; }
+		.carousel-inner .next        { left:  100%; }
+		.carousel-inner .prev		 { left: -100%; }
+		.active > div { display:none; }
+		.active > div:first-child { display:block; }
+	
+	}
+	@media (min-width: 767px) and (max-width: 992px ) {
+		.carousel-inner .active.left { left: -50%; }
+		.carousel-inner .next        { left:  50%; }
+		.carousel-inner .prev		 { left: -50%; }
+		.active > div { display:none; }
+		.active > div:first-child { display:block; }
+		.active > div:first-child + div { display:block; }
+	}
+	@media (min-width: 992px ) {
+		.carousel-inner .active.left { left: -16.7%; }
+		.carousel-inner .next        { left:  16.7%; }
+		.carousel-inner .prev		 { left: -16.7%; }	
+	}
+</style>
+</head>
+<body>
+	<div class="row-fluid">
+		<div class="test_gallery">
+		<!-- 캐러셀 부분 -->
+			<div class="gallery_wrap">
+				<ul class="gallery_tab">
+					<li role="presentation" class="active"><a href="#pane_1" aria-controls="pane_1" role="tab" data-toggle="tab">Test1</a></li>
+					<li role="presentation"><a href="#pane_2" aria-controls="pane_2" role="tab" data-toggle="tab">Test2</a></li>
+					<li role="presentation"><a href="#pane_3" aria-controls="pane_3" role="tab" data-toggle="tab">Test3</a></li>
+					<li role="presentation"><a href="#pane_4" aria-controls="pane_4" role="tab" data-toggle="tab">Test4</a></li>
+				</ul>
+
+				<div class="tab-content">
+					<div role="tabpanel" class="tab-pane active" id="pane_1">
+						<div class="col-md-12">
+							<div class="col-md-10 col-md-offset-1">
+								<div class="carousel slide" data-ride="carousel" data-type="multi" data-interval="3000" id="myCarousel">
+									<div class="carousel-inner">
+										<!-- Slide 1 -->
+										<div class="item active">
+											<div class="col-md-2 col-sm-6 col-xs-12">
+												<ul class="thumbnails">
+													<li class="test_width">
+														<div class="fff">
+															<div class="thumbnail">
+																<a href="#"><img src="http://placehold.it/280x200" alt=""></a>
+															</div>
+															<div class="caption">
+																<h4> Praesent commodo</h4>
+																<p> Nullam Condimentum Nibh Etiam sem</p>
+																<a class="btn btn-mini" href="#">» Read More</a>
+															</div>
+														</div>
+													</li>
+												</ul>
+											</div>
+										</div>
+										<!-- Slide end -->
+										<div class="item">
+											<div class="col-md-2 col-sm-6 col-xs-12">
+												<ul class="thumbnails">
+													<li class="test_width">
+														<div class="fff">
+															<div class="thumbnail">
+																<a href="#"><img src="http://placehold.it/280x200" alt=""></a>
+															</div>
+															<div class="caption">
+																<h4> Praesent commodo</h4>
+																<p> Nullam Condimentum Nibh Etiam sem</p>
+																<a class="btn btn-mini" href="#">» Read More</a>
+															</div>
+														</div>
+													</li>
+												</ul>
+											</div>
+										</div>
+										<div class="item">
+											<div class="col-md-2 col-sm-6 col-xs-12">
+												<ul class="thumbnails">
+													<li class="test_width">
+														<div class="fff">
+															<div class="thumbnail">
+																<a href="#"><img src="http://placehold.it/280x200" alt=""></a>
+															</div>
+															<div class="caption">
+																<h4> Praesent commodo</h4>
+																<p> Nullam Condimentum Nibh Etiam sem</p>
+																<a class="btn btn-mini" href="#">» Read More</a>
+															</div>
+														</div>
+													</li>
+												</ul>
+											</div>
+										</div>
+										<div class="item">
+											<div class="col-md-2 col-sm-6 col-xs-12">
+												<ul class="thumbnails">
+													<li class="test_width">
+														<div class="fff">
+															<div class="thumbnail">
+																<a href="#"><img src="http://placehold.it/280x200" alt=""></a>
+															</div>
+															<div class="caption">
+																<h4> Praesent commodo</h4>
+																<p> Nullam Condimentum Nibh Etiam sem</p>
+																<a class="btn btn-mini" href="#">» Read More</a>
+															</div>
+														</div>
+													</li>
+												</ul>
+											</div>
+										</div>
+										<div class="item">
+											<div class="col-md-2 col-sm-6 col-xs-12">
+												<ul class="thumbnails">
+													<li class="test_width">
+														<div class="fff">
+															<div class="thumbnail">
+																<a href="#"><img src="http://placehold.it/280x200" alt=""></a>
+															</div>
+															<div class="caption">
+																<h4> Praesent commodo</h4>
+																<p> Nullam Condimentum Nibh Etiam sem</p>
+																<a class="btn btn-mini" href="#">» Read More</a>
+															</div>
+														</div>
+													</li>
+												</ul>
+											</div>
+										</div>
+										<div class="item">
+											<div class="col-md-2 col-sm-6 col-xs-12">
+												<ul class="thumbnails">
+													<li class="test_width">
+														<div class="fff">
+															<div class="thumbnail">
+																<a href="#"><img src="http://placehold.it/280x200" alt=""></a>
+															</div>
+															<div class="caption">
+																<h4> Praesent commodo</h4>
+																<p> Nullam Condimentum Nibh Etiam sem</p>
+																<a class="btn btn-mini" href="#">» Read More</a>
+															</div>
+														</div>
+													</li>
+												</ul>
+											</div>
+										</div>
+									</div>
+									<a class="left carousel-control" href="#myCarousel" data-slide="prev"><i class="glyphicon glyphicon-chevron-left"></i></a>
+								  	<a class="right carousel-control" href="#myCarousel" data-slide="next"><i class="glyphicon glyphicon-chevron-right"></i></a>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div role="tabpanel" class="tab-pane" id="pane_2">
+					
+					</div> 
+					<div role="tabpanel" class="tab-pane" id="pane_3">
+					
+					</div> 
+					<div role="tabpanel" class="tab-pane" id="pane_4">
+					</div>
+				</div>
+			</div> <!-- 캐러셀 부분 끝 -->
+		</div>
+	</div>
+
+</body>
+</html>
+
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+	$('.carousel[data-type="multi"] .item').each(function(){
+		  var next = $(this).next();
+		  if (!next.length) {
+		    next = $(this).siblings(':first');
+		  }
+		  next.children(':first-child').clone().appendTo($(this));
+		  
+		  for (var i=0;i<4;i++) {
+		    next=next.next();
+		    if (!next.length) {
+		        next = $(this).siblings(':first');
+		  	}
+		    
+		    next.children(':first-child').clone().appendTo($(this));
+		  }
+	});
+});
+</script>
